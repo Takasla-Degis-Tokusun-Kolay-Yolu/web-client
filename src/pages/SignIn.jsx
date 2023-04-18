@@ -102,7 +102,7 @@ const SignIn = () => {
       </Form.Item>
 
       <Form.Item>
-        <div className="flex flex-rol justify-center items-center align-center">
+        <div className="flex flex-rol justify-end items-center align-center">
           <Button
             htmlType={"submit"}
             className={"mr-2 text-brand-color flex items-center"}
