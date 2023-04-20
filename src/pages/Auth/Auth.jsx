@@ -1,6 +1,6 @@
 import { Tabs } from "antd";
-import SignIn from "./SignIn";
-import SignUp from "./SignUp";
+import SignIn from "./SignIn.jsx";
+import SignUp from "./SignUp.jsx";
 const Auth = () => {
   return (
     <>

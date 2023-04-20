@@ -2,7 +2,7 @@ import { Form, Input, Checkbox, Button } from "antd";
 import { MailOutlined, LockOutlined, LoginOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { signin } from "../store/actions/auth.js";
+import { signin } from "../../store/actions/auth.js";
 
 const SignIn = () => {
   const dispatch = useDispatch();
