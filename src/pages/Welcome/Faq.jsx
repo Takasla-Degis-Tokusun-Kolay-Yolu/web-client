@@ -3,8 +3,8 @@ const Faq = () => {
     return (
         <>
         <div className="mt-20" style={{ fontFamily: 'Urbanist' }}>
-            <h1 className="text-center text-4xl font-bold text-gray-800">Aklına takılan bir şey mi var?</h1>
-            <div className="divide-y space-y-6 divide-gray-100 mx-40">
+            <h1 className="text-center text-2xl md:text-4xl font-bold text-gray-800">Aklına takılan bir şey mi var?</h1>
+            <div className="divide-y space-y-6 divide-gray-100 lg:mx-40">
                     <div className='mt-8 flex gap-4 md:items-center px-10 '>
                         <div className='w-12 h-12 flex gap-4 rounded-full bg-indigo-100 "'>
                             <img src={Question} alt='pie' className='p-2' />
