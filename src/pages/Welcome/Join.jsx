@@ -1,4 +1,5 @@
 import Avatar from '../../assets/images/avatar-2.webp'
+import { Link } from 'react-router-dom';
 const Join = () => (
     <>
         <div className="absolute z-[10] w-[40%] h-[20%] right-0  green__gradient" />
@@ -17,9 +18,9 @@ const Join = () => (
                     Geniş kullanıcı kitlesine sahip olan Takasla'ya adım atmak ister misin? Onlarca farklı kategoride ürünler seni bekliyor.
                 </p>
                 <div className="flex flex-wrap justify-center gap-6 mx-10 md:mx-0">
-                    <a href="#" className="relative flex h-12 w-full items-center justify-center px-8 before:absolute before:inset-0 before:rounded-full before:bg-brand-green/90 before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max">
+                    <Link to='/feed' className="relative flex h-12 w-full items-center justify-center px-8 before:absolute before:inset-0 before:rounded-full before:bg-brand-green/90 before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max">
                         <span className="relative text-base font-semibold text-white ">Takaslamaya Başla!</span>
-                    </a>
+                    </Link>
                     
                 </div>
             </div>

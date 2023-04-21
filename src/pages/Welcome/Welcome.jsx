@@ -7,16 +7,33 @@ import Faq from "./Faq.jsx";
 import Join from "./Join.jsx";
 import Footer from "./Footer.jsx";
 
+import { useRef } from "react";
+
 const Welcome = () => {
+
+  const ref = useRef(null);
+
+  const handleScrollClikToUp = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  }
+
+  const handleScrollClikToDown = () => {
+    ref.current?.scrollIntoView({behavior: 'smooth'});
+  }
+
   return (
     <>
       <Navbar />
-      <Hero />
+      <Hero handleScrollClikToDown={handleScrollClikToDown} />
       <About />
+      <div ref={ref}></div>
       <Features />
       <Faq />
       <Join />
-      <Footer />
+      <Footer handleScrollClikToUp={handleScrollClikToUp} />
     </>
   );
 }

@@ -7,7 +7,7 @@ const About = () => (
     <>
         <div className="flex flex-col w-11/12  lg:w-5/12 justify-center items-start mx-4 md:mx-10 lg:mx-32 align-middle mt-10 md:mt-44" style={{ fontFamily: 'Urbanist' }}>
         <img src={Avatar} alt="what is takasla" className='w-14' />
-        <h1 className='text-3xl md:text-3xl lg:text-5xl font-bold text-gray-700 mt-4'>Eşya Takası Artık Çok Kolay!</h1>
+        <h1  className='text-3xl md:text-3xl lg:text-5xl font-bold text-gray-700 mt-4'>Eşya Takası Artık Çok Kolay!</h1>
         <h3 className='mt-4 text-md text-gray-500'>Eldeki eşyaları yenilemek ya da ihtiyacın olan eşyaları elde etmek için para harcamana gerek yok. Takasla, eşyalarını takas etmenin kolay ve eğlenceli bir yolunu sunuyor. Bu platform sayesinde, kullanmadığın eşyaları takas ederek, yeni eşyaları elde edebilirsin. Üstelik, takas ettiğin eşyalar sayesinde çevreye de katkı sağlayabilirsin. </h3>
     </div>
     <div className='mx-5 md:mx-20 mt-12 grid divide-x divide-y divide-gray-100  overflow-hidden rounded-3xl border border-gray-100 text-gray-600  sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4'>
