@@ -18,7 +18,7 @@ const Join = () => (
                     Geniş kullanıcı kitlesine sahip olan Takasla'ya adım atmak ister misin? Onlarca farklı kategoride ürünler seni bekliyor.
                 </p>
                 <div className="flex flex-wrap justify-center gap-6 mx-10 md:mx-0">
-                    <Link to='/feed' className="relative flex h-12 w-full items-center justify-center px-8 before:absolute before:inset-0 before:rounded-full before:bg-brand-green/90 before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max">
+                    <Link to='/auth' className="relative flex h-12 w-full items-center justify-center px-8 before:absolute before:inset-0 before:rounded-full before:bg-brand-green/90 before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max">
                         <span className="relative text-base font-semibold text-white ">Takaslamaya Başla!</span>
                     </Link>
                     

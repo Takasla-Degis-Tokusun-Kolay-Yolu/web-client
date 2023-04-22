@@ -1,15 +1,17 @@
 import * as api from "../../api/UserRequests.js";
 import { AUTH } from "../../utils/constants/actionTypes.js";
 import { message } from "antd";
-
 // Action creators: functions that return actions
-export const signin = (formData, history) => async (dispatch) => {
+export const signin = (formData, navigate) => async (dispatch) => {
   try {
     const { data } = await api.signIn(formData);
 
     dispatch({ type: AUTH, data });
     setTimeout(() => {
-      history("/");
+      console.log('Routing')
+      navigate('/feed')
+      // TODO: Fix this, it is just a temporary fix
+      window.location.reload();
     }, 1000);
     message.success(
       "You have successfully logged in! Redirecting to home page..."
@@ -25,7 +27,7 @@ export const signup = (formData, history) => async (dispatch) => {
 
     dispatch({ type: AUTH, data });
     setTimeout(() => {
-      history("/");
+      history("/feed");
     }, 1000);
     message.success(
       "You have successfully signed in! Redirecting to home page..."

@@ -1,7 +1,10 @@
 import { Tabs } from "antd";
 import SignIn from "./SignIn.jsx";
 import SignUp from "./SignUp.jsx";
+
 const Auth = () => {
+
+
   return (
     <>
       <div className="w-full h-screen flex justify-center items-center">

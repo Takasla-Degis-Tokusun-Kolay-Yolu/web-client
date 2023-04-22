@@ -1,9 +1,10 @@
-import { Button, Form, Input, Row, Select } from "antd";
-import {LockOutlined, LoginOutlined, MailOutlined, UserAddOutlined, UserOutlined} from "@ant-design/icons";
+import { Button, Form, Input,  Select } from "antd";
+import {LockOutlined,  MailOutlined, UserAddOutlined, UserOutlined} from "@ant-design/icons";
 import CITIES_DATA from "../../../src/data/cities.json";
 import { signup } from "../../store/actions/auth.js";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+
 
 const SignUp = () => {
   const dispatch = useDispatch();
