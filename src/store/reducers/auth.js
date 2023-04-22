@@ -1,4 +1,4 @@
-import { AUTH, LOGOUT } from "../../utils/constants/actionTypes.js";
+import {AUTH, LOGOUT, GET_ACTIVE_USER} from "../../utils/constants/actionTypes.js";
 
 const authReducer = (state = { authData: null }, action) => {
   switch (action.type) {
@@ -11,6 +11,9 @@ const authReducer = (state = { authData: null }, action) => {
     case LOGOUT:
       localStorage.clear();
       return { ...state, authData: null };
+    case GET_ACTIVE_USER:
+        console.log(action?.data);
+        return { ...state, activeUser: action?.data };
     default:
       return state;
   }

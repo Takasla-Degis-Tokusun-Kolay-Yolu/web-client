@@ -1,5 +1,5 @@
 import * as api from "../../api/UserRequests.js";
-import { AUTH } from "../../utils/constants/actionTypes.js";
+import { AUTH, GET_ACTIVE_USER } from "../../utils/constants/actionTypes.js";
 import { message } from "antd";
 // Action creators: functions that return actions
 export const signin = (formData, navigate) => async (dispatch) => {
@@ -34,5 +34,14 @@ export const signup = (formData, history) => async (dispatch) => {
     );
   } catch (error) {
     message.error(error.response.data.message);
+  }
+};
+
+export const fetchActiveUser = () => async (dispatch) => {
+  try {
+    const { data } = await api.fetchActiveUser();
+    dispatch({ type: GET_ACTIVE_USER, data });
+  } catch (error) {
+    console.log(error);
   }
 };

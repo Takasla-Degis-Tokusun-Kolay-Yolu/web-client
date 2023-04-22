@@ -16,6 +16,7 @@ const END_LOADING = "END_LOADING";
 const FETCH_POST = "FETCH_POST";
 
 const COMMENT = "COMMENT";
+const GET_ACTIVE_USER = "GET_ACTIVE_USER";
 
 export {
   CREATE,
@@ -30,4 +31,5 @@ export {
   END_LOADING,
   FETCH_POST,
   COMMENT,
+  GET_ACTIVE_USER
 };

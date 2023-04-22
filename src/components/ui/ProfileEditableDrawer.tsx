@@ -18,13 +18,24 @@ import {
 import CITIES_DATA from "../../data/cities.json";
 import {useRef, useState} from "react";
 import FileBase64 from "react-file-base64";
-
+import {useDispatch} from "react-redux";
+import {useNavigate} from "react-router-dom";
+import { updateUser} from "../../store/actions/user.js";
 
 export const ProfileEditableDrawer = ({ onClose, isShowDrawer, userData }) => {
   const [profileImage, setProfileImage] = useState(userData.profileImage);
   const submitRef = useRef(null);
+  const dispatch = useDispatch();
+    const navigate = useNavigate();
   const handleSaveForm = (values) => {
-    console.log(values);
+    // @ts-ignore
+    values = {
+      firstName: values.firstName,
+      lastName: values.lastName,
+      location: values.location,
+    }
+    // @ts-ignore
+    dispatch(updateUser(values, navigate));
     onClose();
   }
 
@@ -86,6 +97,7 @@ export const ProfileEditableDrawer = ({ onClose, isShowDrawer, userData }) => {
             <Col span={12}>
               <Form.Item name="email" label="Mail Adresiniz">
                 <Input
+                    disabled={true}
                     size="large"
                     name="email"
                     prefix={<MailOutlined />}

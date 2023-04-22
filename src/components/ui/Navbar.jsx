@@ -1,6 +1,6 @@
 import { useState, useEffect, Fragment } from "react";
 import decode from "jwt-decode";
-import { useDispatch } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import { Avatar, Button, Dropdown, message } from "antd";
 import {
   PlusOutlined,
@@ -9,6 +9,7 @@ import {
   PoweroffOutlined,
 } from "@ant-design/icons";
 import { ProfileEditableDrawer } from "./ProfileEditableDrawer";
+import { fetchActiveUser } from "../../store/actions/auth.js";
 
 export const NavBar = () => {
   const dispatch = useDispatch();
@@ -17,6 +18,8 @@ export const NavBar = () => {
   );
   const [isShowDrawer, setIsShowDrawer] = useState(false);
   const [userInformation, setUserInformation] = useState(null);
+
+
 
   useEffect(() => {
     const token = userToken;
@@ -32,6 +35,8 @@ export const NavBar = () => {
     }
   }, [userToken]);
 
+
+
   const logoutHandler = () => {
     dispatch({ type: "LOGOUT" });
     window.location.reload();
@@ -41,6 +46,10 @@ export const NavBar = () => {
   const classNames = (...classes) => {
     return classes.filter(Boolean).join(" ");
   };
+
+  const authData = useSelector((state) => state.authData);
+  console.log(authData);
+
 
   const navigation = [
     { id: 1, name: "Akış", href: "/feed", current: true },
