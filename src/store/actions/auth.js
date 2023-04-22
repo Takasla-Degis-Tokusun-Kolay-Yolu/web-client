@@ -8,8 +8,8 @@ export const signin = (formData, navigate) => async (dispatch) => {
 
     dispatch({ type: AUTH, data });
     setTimeout(() => {
-      console.log('Routing')
-      navigate('/feed')
+      console.log("Routing");
+      navigate("/feed");
       // TODO: Fix this, it is just a temporary fix
       window.location.reload();
     }, 1000);

@@ -10,19 +10,18 @@ import Footer from "./Footer.jsx";
 import { useRef } from "react";
 
 const Welcome = () => {
-
   const ref = useRef(null);
 
   const handleScrollClikToUp = () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth"
+      behavior: "smooth",
     });
-  }
+  };
 
   const handleScrollClikToDown = () => {
-    ref.current?.scrollIntoView({behavior: 'smooth'});
-  }
+    ref.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <>
@@ -36,6 +35,6 @@ const Welcome = () => {
       <Footer handleScrollClikToUp={handleScrollClikToUp} />
     </>
   );
-}
+};
 
 export default Welcome;

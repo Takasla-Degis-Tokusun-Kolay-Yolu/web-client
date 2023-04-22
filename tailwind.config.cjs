@@ -3,7 +3,7 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend:{
+    extend: {
       colors: {
         "brand-green": "#4A772F",
         "brand-green-soft": "#A1DD70",
@@ -14,5 +14,4 @@ export default {
     },
   },
   plugins: [require("@tailwindcss/forms")],
-}
-
+};

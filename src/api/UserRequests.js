@@ -1,5 +1,5 @@
 import axios from "axios";
-import {message} from "antd";
+import { message } from "antd";
 
 const API = axios.create({ baseURL: "http://localhost:6060/users" });
 

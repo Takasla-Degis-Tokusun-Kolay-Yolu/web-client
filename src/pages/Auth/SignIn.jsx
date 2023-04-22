@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { signin } from "../../store/actions/auth.js";
 
-
 const SignIn = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -16,8 +15,6 @@ const SignIn = () => {
     dispatch(signin(values, navigate));
   };
   const onFinishFailed = (errorInfo) => {};
-
-
 
   return (
     <Form
