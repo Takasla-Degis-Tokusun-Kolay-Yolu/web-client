@@ -23,7 +23,9 @@ const SignUp = () => {
       password: values.password1,
       location: values.location,
     };
-    dispatch(signup(values, navigate));
+    dispatch(signup(values)).then(() => {
+      navigate("/feed");
+    });
   };
   const onFinishFailed = (errorInfo) => {};
 

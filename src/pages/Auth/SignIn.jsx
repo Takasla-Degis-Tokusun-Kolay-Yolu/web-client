@@ -12,7 +12,9 @@ const SignIn = () => {
       email: values.email,
       password: values.password,
     };
-    dispatch(signin(values, navigate));
+    dispatch(signin(values)).then(() => {
+      navigate("/feed");
+    });
   };
   const onFinishFailed = (errorInfo) => {};
 

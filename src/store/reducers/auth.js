@@ -1,19 +1,43 @@
-import {AUTH, LOGOUT, GET_ACTIVE_USER} from "../../utils/constants/actionTypes.js";
+import {
+  AUTH,
+  LOGOUT,
+  START_LOADING,
+  END_LOADING,
+  UPDATE_ACTIVE_USER,
+  DELETE_USER,
+} from "../../utils/constants/actionTypes.js";
 
-const authReducer = (state = { authData: null }, action) => {
+const initialState = {
+  activeUser: null,
+  isLoading: false,
+};
+
+const authReducer = (state = initialState, action) => {
   switch (action.type) {
+    case START_LOADING:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case END_LOADING:
+      return {
+        ...state,
+        isLoading: false,
+      };
     case AUTH:
       localStorage.setItem(
         "access_token",
-        action?.data.data?.tokens?.access_token
+        action?.payload.data?.tokens?.access_token
       );
-      return { ...state, authData: action?.data };
+      return { ...state, activeUser: action?.payload?.data };
+    case UPDATE_ACTIVE_USER:
+      return { ...state, activeUser: action.payload.data };
+    case DELETE_USER:
+      localStorage.clear();
+      return { ...state, activeUser: null };
     case LOGOUT:
       localStorage.clear();
-      return { ...state, authData: null };
-    case GET_ACTIVE_USER:
-        console.log(action?.data);
-        return { ...state, activeUser: action?.data };
+      return { ...state, activeUser: null };
     default:
       return state;
   }

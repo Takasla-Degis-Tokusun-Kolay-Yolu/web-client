@@ -10,18 +10,38 @@ import thunk from "redux-thunk";
 import reducers from "./store/reducers";
 import { ConfigProvider } from "antd";
 
-const store = createStore(reducers, compose(applyMiddleware(thunk)));
+// redux-persist initialization
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import { PersistGate } from "redux-persist/integration/react";
 
+const persistConfig = {
+  key: "root",
+  storage,
+};
+
+const persistedReducer = persistReducer(persistConfig, reducers);
+
+//const store = createStore(reducers, compose(applyMiddleware(thunk)));
+const store = createStore(persistedReducer, compose(applyMiddleware(thunk)));
+let persistor = persistStore(store);
+store.subscribe(() => {
+  console.log(store.getState());
+});
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <Provider store={store}>
-    <ConfigProvider
-      theme={{
-        token: {
-          colorPrimary: "#4A772F",
-        },
-      }}
-    >
-      <App />
-    </ConfigProvider>
-  </Provider>
+  <React.StrictMode>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <ConfigProvider
+          theme={{
+            token: {
+              colorPrimary: "#4A772F",
+            },
+          }}
+        >
+          <App />
+        </ConfigProvider>
+      </PersistGate>
+    </Provider>
+  </React.StrictMode>
 );
