@@ -12,7 +12,7 @@ import { ProfileEditableDrawer } from "./ProfileEditableDrawer";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/images/logo-top.png";
 import {CreateProductModal} from "./CreateProductModal";
-export const NavBar = ({ userInformation, activeUser }) => {
+export const NavBar = ({ userInformation, activeUser, categories }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [userToken, setUserToken] = useState(
@@ -189,7 +189,7 @@ export const NavBar = ({ userInformation, activeUser }) => {
       {
         isShowProductDrawer && (
             <CreateProductModal
-                isModalOpen={isShowProductDrawer} handleCancel={() => setIsShowProductDrawer(false)}
+                isModalOpen={isShowProductDrawer} categories={categories} handleCancel={() => setIsShowProductDrawer(false)}
             />
           )
       }

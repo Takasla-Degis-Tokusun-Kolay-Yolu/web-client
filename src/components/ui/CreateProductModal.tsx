@@ -1,7 +1,7 @@
 import {Avatar, Button, Col, Form, Input, Modal, Popconfirm, Rate, Row, Select, Space} from "antd";
-import {MailOutlined, UserOutlined} from "@ant-design/icons";
-import FileBase64 from "react-file-base64";
-export const CreateProductModal = ({ isModalOpen, handleCancel }) => {
+import {FontSizeOutlined, MailOutlined, UserOutlined} from "@ant-design/icons";
+export const CreateProductModal = ({ isModalOpen, handleCancel, categories }) => {
+
     const handleOk = () => {
         console.log('Alarko kombi gerçek kombi gerçek konfor!')
     };
@@ -9,7 +9,6 @@ export const CreateProductModal = ({ isModalOpen, handleCancel }) => {
     const handleSaveForm = (values) => {
         console.log(values)
     }
-
     return (
         <Modal title="İlan Oluştur" open={isModalOpen} onOk={handleOk} onCancel={handleCancel} footer={[
             <Space>
@@ -34,33 +33,90 @@ export const CreateProductModal = ({ isModalOpen, handleCancel }) => {
 
                 <Row gutter={16}>
                     <Col span={12}>
-                        <Form.Item name="firstName" label="Adınız">
+                        <Form.Item name="name" label="Ürün Adı">
                             <Input
                                 size="large"
                                 name="firstName"
-                                prefix={<UserOutlined />}
+                                prefix={<FontSizeOutlined />}
                             />
                         </Form.Item>
                     </Col>
                     <Col span={12}>
-                        <Form.Item name="lastName" label="Soyadınız">
-                            <Input size="large" name="lastName" prefix={<UserOutlined />} />
+                        <Form.Item
+                            label="Kategoriler"
+                            style={{
+                                marginBottom: 10,
+                            }}
+                            name="categoryId"
+                        >
+                            <Select
+                                size={"large"}
+                                mode={"multiple"}
+                                showSearch={false}
+                                maxTagCount={'responsive'}
+                                placeholder={"Kategori Seçiniz"}
+                                options={categories.map((category) => {
+                                    return {
+                                        label: category.name,
+                                        value: category._id,
+                                        key: category._id,
+                                    };
+                                })}
+                            />
                         </Form.Item>
                     </Col>
                 </Row>
                 <Row gutter={16}>
                     <Col span={12}>
-                        <Form.Item name="email" label="Mail Adresiniz">
-                            <Input
-                                disabled={true}
-                                size="large"
-                                name="email"
-                                prefix={<MailOutlined />}
+                        <Form.Item name="usageLevel" label="Kullanılma Durumu Giriniz">
+                            <Select
+                                size={"large"}
+                                showSearch={false}
+                                maxTagCount={'responsive'}
+                                placeholder={"Kullanım Durumu Seçiniz"}
+                                options={[
+                                    { value: 0, label: 'Yeni/Etiketli' },
+                                    { value: 1, label: 'Az Kullanılmış' },
+                                    { value: 2, label: 'Kullanılmış' },
+                                ]}
                             />
                         </Form.Item>
                     </Col>
                     <Col span={12}>
+                        <Form.Item
+                            label="Kabul Edilen Kategoriler"
+                            style={{
+                                marginBottom: 10,
+                            }}
+                            name="acceptedCategories"
+                        >
+                            <Select
+                                size={"large"}
+                                mode={"multiple"}
+                                showSearch={false}
+                                maxTagCount={'responsive'}
+                                placeholder={"Kategorleri Seçiniz"}
+                                options={categories.map((category) => {
+                                    return {
+                                        label: category.name,
+                                        value: category._id,
+                                        key: category._id,
+                                    };
+                                })}
+                            />
+                        </Form.Item>
+                    </Col>
+                </Row>
+                <Row gutter={16}>
+                    <Col span={24}>
 
+                    </Col>
+                </Row>
+                <Row gutter={16}>
+                    <Col span={24}>
+                        <Form.Item name="description" label="Açıklama">
+                            <Input.TextArea />
+                        </Form.Item>
                     </Col>
                 </Row>
             </Form>

@@ -1,19 +1,25 @@
 import { NavBar } from "../../components/ui/Navbar";
-import { useEffect, useState } from "react";
+import {useEffect, useRef, useState} from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ProductWrapper } from "../../components/ui/ProductWrapper";
 import {Loader} from "../../components/global/Loader";
 import {useDispatch} from "react-redux";
 import {getAllProducts} from "../../store/actions/products.js";
+import {getAllCategories} from "../../store/actions/categories.js";
 const Feed = () => {
-  const [userInformation, setUserInformation] = useState({});
-  const activeUser = useSelector((state) => state.auth.activeUser);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const [userInformation, setUserInformation] = useState({});
+  const activeUser = useSelector((state) => state.auth.activeUser);
+  const initalRef = useRef(0);
   useEffect(() => {
-    dispatch(getAllProducts);
+    if (initalRef.current === 0) {
+      dispatch(getAllProducts());
+      dispatch(getAllCategories());
+      initalRef.current = 1;
+      return;
+    }
   }, [])
 
   useEffect(() => {
@@ -29,16 +35,25 @@ const Feed = () => {
   useEffect(() => {
     if (productsFromStore) {
       setProducts(productsFromStore);
-    } else {
-      navigate("/");
     }
   }, [productsFromStore]);
 
+  const [categories, setCategories] = useState([]);
+  const { categories: categoriesFromStore } = useSelector((state) => state.categories);
+
+  useEffect(() => {
+    if (categoriesFromStore) {
+      setCategories(categoriesFromStore);
+    }
+  }, [categoriesFromStore]);
+
+
+
   return (
     <>
-      <NavBar userInformation={userInformation} activeUser={activeUser} />
+      <NavBar userInformation={userInformation} activeUser={activeUser} categories={categories} />
       {
-        isLoading ? <Loader /> : (<ProductWrapper products={products} />)
+        isLoading && products.length === 0 ? <Loader /> : (<ProductWrapper products={products}  />)
       }
     </>
   );
