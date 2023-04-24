@@ -11,6 +11,7 @@ import {
 import { ProfileEditableDrawer } from "./ProfileEditableDrawer";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/images/logo-top.png";
+import {CreateProductModal} from "./CreateProductModal";
 export const NavBar = ({ userInformation, activeUser }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ export const NavBar = ({ userInformation, activeUser }) => {
     localStorage.getItem("access_token")
   );
   const [isShowDrawer, setIsShowDrawer] = useState(false);
+  const [isShowProductDrawer, setIsShowProductDrawer] = useState(false);
 
   useEffect(() => {
     const token = userToken;
@@ -112,13 +114,14 @@ export const NavBar = ({ userInformation, activeUser }) => {
               </div>
             </div>
             {Object.keys(userInformation).length > 0 && activeUser ? (
-              <div className={"flex flex-row items-center"}>
+              <div className={"flex flex-row justify-around items-center"}>
                 <Button
-                  className="bg-brand-green text-white mr-2"
+                  className="bg-brand-green text-white mr-2 flex flex-row items-center hover:bg-brand-green/20  hover:text-brand-green duration-300"
                   shape="round"
                   icon={<PlusOutlined />}
+                  onClick={() => { setIsShowProductDrawer(true) }}
                 >
-                  Primary Button
+                  İlan Ver
                 </Button>
                 <Dropdown
                   menu={menuProps}
@@ -183,6 +186,13 @@ export const NavBar = ({ userInformation, activeUser }) => {
           isShowDrawer={isShowDrawer}
         />
       )}
+      {
+        isShowProductDrawer && (
+            <CreateProductModal
+                isModalOpen={isShowProductDrawer} handleCancel={() => setIsShowProductDrawer(false)}
+            />
+          )
+      }
     </Fragment>
   );
 };

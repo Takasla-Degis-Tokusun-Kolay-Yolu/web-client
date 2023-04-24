@@ -2,7 +2,7 @@ import { BarChartOutlined } from "@ant-design/icons";
 import {Avatar, Image, Rate} from "antd";
 export const ProductCard = ({productData}) => {
   return (
-    <div className="w-1/6 container bg-white rounded-xl shadow-lg transform transition duration-500 hover:scale-105 hover:shadow-2xl">
+    <div className="w-full mb-2 md:mb-3 sm:w-1/3 md:w-1/3 lg:w-1/5 container bg-white rounded-xl shadow-lg transform transition duration-500 hover:scale-105 hover:shadow-2xl">
       <div>
         {
           productData.categoryId.map((category) => {
@@ -36,7 +36,7 @@ export const ProductCard = ({productData}) => {
                     alt={productData.userId.firstName}
                 />
             ) : (
-                <Avatar style={{ backgroundColor: '#A1DD70', verticalAlign: 'middle' }} size="large" gap={gap}>
+                <Avatar style={{ backgroundColor: '#A1DD70', verticalAlign: 'middle' }} size="large" gap={4}>
                     {productData.userId.firstName[0].toUpperCase()}
                 </Avatar>
             )

@@ -37,7 +37,6 @@ const Feed = () => {
   return (
     <>
       <NavBar userInformation={userInformation} activeUser={activeUser} />
-      <ProductWrapper products={products} />
       {
         isLoading ? <Loader /> : (<ProductWrapper products={products} />)
       }
