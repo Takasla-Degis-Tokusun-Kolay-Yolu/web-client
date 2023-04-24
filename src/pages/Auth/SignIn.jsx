@@ -51,10 +51,6 @@ const SignIn = () => {
             message: "Geçerli bir mail adresi giriniz.",
           },
           {
-            pattern: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-            message: "Geçerli bir mail adresi giriniz.",
-          },
-          {
             whitespace: true,
             message: "Mail adresiniz boşluk içermemelidir.",
           },

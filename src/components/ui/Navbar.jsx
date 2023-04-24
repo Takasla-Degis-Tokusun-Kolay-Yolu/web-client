@@ -11,7 +11,7 @@ import {
 import { ProfileEditableDrawer } from "./ProfileEditableDrawer";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/images/logo-top.png";
-import {CreateProductModal} from "./CreateProductModal";
+import { CreateProductModal } from "./CreateProductModal";
 export const NavBar = ({ userInformation, activeUser, categories }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -119,7 +119,9 @@ export const NavBar = ({ userInformation, activeUser, categories }) => {
                   className="bg-brand-green text-white mr-2 flex flex-row items-center hover:bg-brand-green/20  hover:text-brand-green duration-300"
                   shape="round"
                   icon={<PlusOutlined />}
-                  onClick={() => { setIsShowProductDrawer(true) }}
+                  onClick={() => {
+                    setIsShowProductDrawer(true);
+                  }}
                 >
                   İlan Ver
                 </Button>
@@ -186,13 +188,13 @@ export const NavBar = ({ userInformation, activeUser, categories }) => {
           isShowDrawer={isShowDrawer}
         />
       )}
-      {
-        isShowProductDrawer && (
-            <CreateProductModal
-                isModalOpen={isShowProductDrawer} categories={categories} handleCancel={() => setIsShowProductDrawer(false)}
-            />
-          )
-      }
+      {isShowProductDrawer && (
+        <CreateProductModal
+          isModalOpen={isShowProductDrawer}
+          categories={categories}
+          handleCancel={() => setIsShowProductDrawer(false)}
+        />
+      )}
     </Fragment>
   );
 };

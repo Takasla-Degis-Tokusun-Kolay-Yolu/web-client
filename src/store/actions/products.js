@@ -1,16 +1,31 @@
 import * as api from "../../api/ProductRequests.js";
 import {
-    FETCH_ALL_PRODUCT, START_LOADING, END_LOADING
+  FETCH_ALL_PRODUCT,
+  START_LOADING,
+  END_LOADING,
+  CREATE_PRODUCT
 } from "../../utils/constants/actionTypes.js";
 import { message } from "antd";
 
 export const getAllProducts = () => async (dispatch) => {
+  try {
+    dispatch({ type: START_LOADING });
+    const { data } = await api.getAllProducts();
+    dispatch({ type: FETCH_ALL_PRODUCT, payload: data });
+    dispatch({ type: END_LOADING });
+  } catch (error) {
+    message.error(error.response.data.message);
+  }
+};
+
+export const createProduct = (formData) => async (dispatch) => {
     try {
         dispatch({ type: START_LOADING });
-        const { data } = await api.getAllProducts();
-        dispatch({ type: FETCH_ALL_PRODUCT, payload: data });
+        const { data } = await api.createProduct(formData);
+        console.log('from action',data);
+        dispatch({ type: CREATE_PRODUCT, payload: data });
         dispatch({ type: END_LOADING });
     } catch (error) {
-        message.error(error.response.data.message);
+        message.error(error.message);
     }
-};
+}
