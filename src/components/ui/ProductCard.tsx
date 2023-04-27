@@ -1,5 +1,5 @@
 import { BarChartOutlined } from "@ant-design/icons";
-import { Avatar, Image, Rate } from "antd";
+import { Avatar, Image } from "antd";
 export const ProductCard = ({ productData }) => {
   return (
     <div className="w-full mb-2 md:mb-3 sm:w-1/3 md:w-1/3 lg:w-1/5 container bg-white rounded-xl shadow-lg transform transition duration-500 hover:scale-105 hover:shadow-2xl">

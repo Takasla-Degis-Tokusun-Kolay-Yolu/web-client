@@ -1,6 +1,6 @@
-import { useState, useEffect, Fragment } from "react";
+import {useState, useEffect, Fragment, useRef} from "react";
 import decode from "jwt-decode";
-import { useDispatch } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import { Avatar, Button, Dropdown, message } from "antd";
 import {
   PlusOutlined,
@@ -12,7 +12,15 @@ import { ProfileEditableDrawer } from "./ProfileEditableDrawer";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/images/logo-top.png";
 import { CreateProductModal } from "./CreateProductModal";
-export const NavBar = ({ userInformation, activeUser, categories }) => {
+import {getAllCategories} from "../../store/actions/categories.js";
+export const NavBar = () => {
+  useEffect(() => {
+    if (initialRef.current === 0) {
+      dispatch(getAllCategories());
+      initialRef.current = 1;
+      return;
+    }
+  }, []);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [userToken, setUserToken] = useState(
@@ -67,7 +75,7 @@ export const NavBar = ({ userInformation, activeUser, categories }) => {
   const handleMenuClick = (e) => {
     switch (e.key) {
       case "1":
-        console.log("Profil");
+        navigate("/me")
         break;
       case "2":
         setIsShowDrawer(true);
@@ -87,6 +95,37 @@ export const NavBar = ({ userInformation, activeUser, categories }) => {
     items,
     onClick: handleMenuClick,
   };
+
+  const [userInformation, setUserInformation] = useState({});
+  const activeUser = useSelector((state) => state.auth.activeUser);
+  const initialRef = useRef(0);
+  useEffect(() => {
+    if (initialRef.current === 0) {
+      dispatch(getAllCategories());
+      initialRef.current = 1;
+      return;
+    }
+  }, []);
+
+  useEffect(() => {
+    if (activeUser) {
+      setUserInformation(activeUser);
+    } else {
+      navigate("/");
+    }
+  }, [activeUser]);
+
+  const [categories, setCategories] = useState([]);
+  const { categories: categoriesFromStore } = useSelector(
+      (state) => state.categories
+  );
+
+  useEffect(() => {
+    if (categoriesFromStore) {
+      setCategories(categoriesFromStore);
+    }
+  }, [categoriesFromStore]);
+
 
   return (
     <Fragment>

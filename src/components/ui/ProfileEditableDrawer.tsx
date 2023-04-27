@@ -5,14 +5,12 @@ import {
   Drawer,
   Form,
   Input,
-  Rate,
   Row,
   Select,
   Space,
   Popconfirm,
 } from "antd";
-import { MailOutlined, UserOutlined } from "@ant-design/icons";
-
+import {DeleteOutlined, MailOutlined, UserOutlined} from "@ant-design/icons";
 // @ts-ignore
 import CITIES_DATA from "../../data/cities.json";
 import { useRef, useState } from "react";
@@ -93,7 +91,7 @@ export const ProfileEditableDrawer = ({ onClose, isShowDrawer, userData }) => {
               span={24}
               className={"flex flex-col items-center justify-center gap-y-2"}
             >
-              <Rate disabled defaultValue={userData.rate} />
+              <Button onClick={() => setProfileImage('-')} className={'bg-brand-red flex flex-row justify-center items-center px-3 py-1 text-white rounded-md hover:bg-brand-red/20 hover:text-brand-red duration-300'} icon={<DeleteOutlined />}>Profil Fotoğrafımı Kaldır</Button>
               {profileImage === "-" ? (
                 <Avatar shape="square" size={80} icon={<UserOutlined />} />
               ) : (
