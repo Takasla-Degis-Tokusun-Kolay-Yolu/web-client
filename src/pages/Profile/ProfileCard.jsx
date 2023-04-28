@@ -9,7 +9,7 @@ export const ProfileCard = ({user}) => {
             <Rate rootClassName={'flex justify-center mb-2'} disabled defaultValue={user?.rate} />
             <div className={'w-full flex flex-row justify-center items-center'}>
                 <Card
-                    className={'w-1/2 mx-48'}
+                    className={'w-2/3 mx-48'}
                     title={user?.firstName + ' ' + user?.lastName }
                     extra={<span><Tag color="geekblue">ID: {user?._id}</Tag></span>}
 
@@ -21,23 +21,7 @@ export const ProfileCard = ({user}) => {
                     </div>
                 </Card>
             </div>
-            <div className={'w-full flex flex-row justify-center items-center'}>
-                <Tabs
-                    className={'w-1/2 mx-48 pt-2 bg-white p-10'}
-                    centered
-                    onChange={() => console.log('tab changed')}
-                    size="large"
-                    type="line"
-                    items={new Array(3).fill(null).map((_, i) => {
-                        const id = String(i + 1);
-                        return {
-                            label: `Tab ${id}`,
-                            key: id,
-                            children: `Content of Tab Pane ${id}`,
-                        };
-                    })}
-                />
-            </div>
+
         </>
     )
 }
