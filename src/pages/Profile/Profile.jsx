@@ -11,7 +11,7 @@ export const Profile = () => {
             <NavBar />
             <Hero user={activeUser} />
             <ProfileCard user={activeUser} />
-            <TabView />
+            <TabView user={activeUser} />
         </>
     )
 }

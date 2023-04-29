@@ -3,6 +3,7 @@ import {
   END_LOADING,
   FETCH_ALL_PRODUCT,
   START_LOADING,
+  FETCH_USER_PRODUCTS
 } from "../../utils/constants/actionTypes.js";
 
 const initialState = {
@@ -26,6 +27,8 @@ const productsReducer = (state = initialState, action) => {
       return { ...state, products: action.payload.data };
     case CREATE_PRODUCT:
         return { ...state, products: [...state.products, action.payload.data] };
+    case FETCH_USER_PRODUCTS:
+        return { ...state, specUserProducts: action.payload.data };
     default:
       return state;
   }

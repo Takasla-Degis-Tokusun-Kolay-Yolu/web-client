@@ -1,6 +1,7 @@
-import {Image} from "antd";
+import {Image, Avatar} from "antd";
+import {UserOutlined} from "@ant-design/icons";
 
-export const Hero = () => {
+export const Hero = ({user}) => {
     return (
         <div className={'w-full bg-gradient-to-t from-brand-green to-brand-green/60 h-40 flex flex-row justify-center items-end mb-24'}>
             <div className={'w-40 h-40 bg-brand-green/50 rounded-full -mb-20'}>

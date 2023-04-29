@@ -14,7 +14,7 @@ export const ProfileCard = ({user}) => {
                     extra={<span><Tag color="geekblue">ID: {user?._id}</Tag></span>}
 
                 >
-                    <div className={'flex flex-row justify-around'}>
+                    <div className={'flex flex-col md:flex-row gap-y-2 md:gap-y-0 justify-around'}>
                         <p className={'flex flex-row gap-x-2'}><MailOutlined />{user?.email}</p>
                         <p className={'flex flex-row gap-x-2'}><EnvironmentOutlined /> {user?.location} </p>
                         <p className={'flex flex-row gap-x-2'}><FieldTimeOutlined />{differenceInDays(new Date(), new Date(user?.createdAt))} gündür üye</p>

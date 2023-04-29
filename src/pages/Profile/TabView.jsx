@@ -1,6 +1,9 @@
 import {Tabs} from "antd";
+import {Products} from "./Tabs/Products.jsx";
+import {Requests} from "./Tabs/Requests.jsx";
+import {Offers} from "./Tabs/Offers.jsx";
 
-export const TabView = () => {
+export const TabView = ({user}) => {
     return (
         <div className={'w-full flex flex-row justify-center items-center'}>
             <Tabs
@@ -10,9 +13,9 @@ export const TabView = () => {
                 type="line"
                 defaultActiveKey="products"
                 items={[
-                    {key: 'products', label: 'Ürünler', children: <div>Content of Tab Pane 1</div>},
-                    {key: 'request', label: 'Başvurular', children: <div>Content of Tab Pane 2</div>},
-                    {key: 'offer', label: 'Teklifler', children: <div>Content of Tab Pane 3</div>},
+                    {key: 'products', label: 'Ürünler', children: <Products user={user}/>},
+                    {key: 'request', label: 'Başvurular', children: <Requests user={user}/>},
+                    {key: 'offer', label: 'Teklifler', children: <Offers user={user}/>},
                 ]}
             />
         </div>

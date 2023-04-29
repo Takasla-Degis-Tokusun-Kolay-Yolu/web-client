@@ -13,3 +13,4 @@ API.interceptors.request.use((req) => {
 
 export const getAllProducts = () => API.get("/");
 export const createProduct = (formData) => API.post("/", formData);
+export const getUserProducts = (userId) => API.get(`/user-products/${userId}`);

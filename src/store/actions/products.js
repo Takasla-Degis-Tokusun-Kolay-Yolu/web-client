@@ -3,7 +3,8 @@ import {
   FETCH_ALL_PRODUCT,
   START_LOADING,
   END_LOADING,
-  CREATE_PRODUCT
+  CREATE_PRODUCT,
+    FETCH_USER_PRODUCTS
 } from "../../utils/constants/actionTypes.js";
 import { message } from "antd";
 
@@ -29,3 +30,15 @@ export const createProduct = (formData) => async (dispatch) => {
         message.error(error.message);
     }
 }
+
+export const userProducts = (id) => async (dispatch) => {
+    try {
+        dispatch({ type: START_LOADING });
+        const { data } = await api.getUserProducts(id);
+        dispatch({ type: FETCH_USER_PRODUCTS, payload: data });
+        dispatch({ type: END_LOADING });
+    } catch (error) {
+        message.error(error.message);
+    }
+};
+
