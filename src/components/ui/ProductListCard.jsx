@@ -21,7 +21,7 @@ export const ProductListCard = ({productData}) => {
     }, [productData]);
     return (
         <div>
-            <div className={'flex flex-col md:flex-row justify-around gap-x-4'}>
+            <div className={'flex w-full flex-row justify-between '}>
                 <Image
                     width={70}
                     height={70}
@@ -29,22 +29,14 @@ export const ProductListCard = ({productData}) => {
                     src={productData.image}
                     preview={{maskClassName: 'rounded-lg'}}
                 />
-                <div className={'flex flex-col'}>
-                    <h2 className={'text-lg text-gray-700'}>{productData.name}</h2>
-                    <p className={'text-sm text-gray-500'}>{productUsageLevel}</p>
-                    <div className={'flex flex-row mt-2'}>
-                        {
-                            productData.categoryId.map((category) => (<Tag key={category._id} color={'geekblue'}>{category.name}</Tag>))
-                        }
-                    </div>
+                <div>
+                    <h2 className={'text-xs text-gray-500'}>Ürün Adı</h2>
+                    <p className={'text-md font-medium text-gray-700'}>{productData.name}</p>
+
                 </div>
                 <div>
-                    <p className={'text-lg text-gray-700'}>Kabul edilen kategoriler:</p>
-                    <div className={'flex flex-wrap w-1/3 mt-2'}>
-                        {
-                            productData.acceptedCategories.map((category) => (<Tag key={category._id} color={'geekblue'}>{category.name}</Tag>))
-                        }
-                    </div>
+                    <h2 className={'text-xs text-gray-500 w-1/4'}>Kullanım Durumu</h2>
+                    <p className={'text-md font-medium text-gray-700'}>{productUsageLevel}</p>
                 </div>
             </div>
             <Divider />

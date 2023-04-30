@@ -1,4 +1,5 @@
 import {ProductListCard} from "./ProductListCard.jsx";
+import {ProductListTable} from "./ProductListTable.jsx";
 
 export const ProductListWrapper = ({ products }) => {
     return (
@@ -7,9 +8,7 @@ export const ProductListWrapper = ({ products }) => {
                 "flex flex-col justify-center  items-start mx-auto w-full"
             }
         >
-            {products.map((item) => (
-                <ProductListCard key={item._id} productData={item} />
-            ))}
+            <ProductListTable products={products} />
         </div>
     );
 };

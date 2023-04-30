@@ -1,20 +1,39 @@
 import { BarChartOutlined } from "@ant-design/icons";
-import { Avatar, Image } from "antd";
+import { Avatar, Image, Tag } from "antd";
 export const ProductCard = ({ productData }) => {
+    const CategoryView = () => {
+        if (productData.categoryId.length > 4) {
+            const firstThreeCategories = productData.categoryId.slice(0, 3);
+            const remainingCount = productData.categoryId.length - 3;
+            return (
+                <>
+                    {firstThreeCategories.map((category) => (
+                        <span className={'text-white text-xs font-medium rounded-lg bg-green-500 inline-block mt-4 ml-2 py-1.5 px-2 cursor-pointer'} key={category._id}>
+                            {category.name}
+                        </span>
+                    ))}
+                    <span className={'text-white text-xs font-medium rounded-lg bg-green-500 inline-block mt-4 ml-2 py-1.5 px-2 cursor-pointer'}  key="remaining">
+                        + {remainingCount} diğer
+                    </span>
+                </>
+            );
+        } else {
+            return (
+                <>
+                    {productData.categoryId.map((category) => (
+                        <span className={'text-white text-xs font-medium rounded-lg bg-green-500 inline-block mt-4 ml-2 py-1.5 px-2 cursor-pointer'} color="blue" key={category._id}>
+                            {category.name}
+                        </span>
+                    ))}
+                </>
+            );
+        }
+    };
+
   return (
     <div className="w-full mb-2 md:mb-3 sm:w-1/3 md:w-1/3 lg:w-1/5 container bg-white rounded-xl shadow-lg transform transition duration-500 hover:scale-105 hover:shadow-2xl">
       <div>
-        {productData.categoryId.length > 0 &&
-          productData.categoryId.map((category) => {
-            return (
-              <span
-                key={category._id}
-                className="text-white text-xs font-medium rounded-lg bg-green-500 inline-block mt-4 ml-2 py-1.5 px-2 cursor-pointer"
-              >
-                {category.name}
-              </span>
-            );
-          })}
+        {productData.categoryId.length > 0 && (<CategoryView />)}
         <h1 className="text-md mt-1 ml-4 font-bold text-gray-800 cursor-pointer hover:text-gray-900 transition duration-100">
           {productData.name}
         </h1>
