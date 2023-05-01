@@ -121,9 +121,9 @@ export const CreateProductModal = ({
                 maxTagCount={"responsive"}
                 placeholder={"Kullanım Durumu Seçiniz"}
                 options={[
-                  { value: 0, label: "Yeni/Etiketli" },
-                  { value: 1, label: "Az Kullanılmış" },
-                  { value: 2, label: "Kullanılmış" },
+                  { value: 0, label: "Yeni/Etiketli", key: "new" },
+                  { value: 1, label: "Az Kullanılmış" , key: "used"},
+                  { value: 2, label: "Kullanılmış" , key: "very-used"},
                 ]}
               />
             </Form.Item>
@@ -146,7 +146,7 @@ export const CreateProductModal = ({
                   return {
                     label: category.name,
                     value: category._id,
-                    key: category._id+ 'accepted',
+                    key: `${category._id}-accepted`
                   };
                 })}
               />

@@ -11,7 +11,7 @@ export const Products = ({user}) => {
         dispatch(userProducts(user._id));
     }, [])
     const {isLoading, specUserProducts} = useSelector(state => state.products);
-    console.log(specUserProducts);
+    //console.log(specUserProducts);
     return (
         <div>
             {

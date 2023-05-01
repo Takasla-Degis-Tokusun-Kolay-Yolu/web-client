@@ -1,6 +1,25 @@
-import {Image, Table, Tag, Button, Tooltip} from "antd";
+import {Image, Table, Tag, Button, Tooltip, Popconfirm, message} from "antd";
 import {CreditCardOutlined, DeleteOutlined, EditOutlined, EyeOutlined} from "@ant-design/icons";
+import {useSelector} from "react-redux";
+import {useEffect, useState} from "react";
+import {EditProductModal} from "./EditProductModal.jsx";
+import {useDispatch} from "react-redux";
+import {deleteProduct} from "../../store/actions/products.js";
+import {useNavigate} from "react-router-dom";
 export const ProductListTable = ({ products }) => {
+    const [productsOwner, setProductsOwner] = useState({});
+    const [isShowEditProductModal, setIsShowEditProductModal] = useState(false);
+    const [selectedProduct, setSelectedProduct] = useState({});
+    const categoriesCtx = useSelector(state => state.categories.categories);
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (products.length > 0) {
+            setProductsOwner(products[0].userId);
+        }
+
+    }, [])
+    const activeUser = useSelector(state => state.auth.activeUser);
+    const dispatch = useDispatch();
     const columns = [
         {
           title: 'Ürün Resmi',
@@ -85,23 +104,61 @@ export const ProductListTable = ({ products }) => {
                 return (
                     <div className={'flex flex-row gap-x-2 justify-center items-center'}>
                         <Tooltip title={'Görüntüle'}>
-                            <Button onClick={() => handleClickDetailButton(record)} className={'bg-blue-500 text-white rounded-md hover:bg-blue:500/25 hover:text-blue-500 duration-300'} icon={<EyeOutlined />} size="large" />
+                            <Button onClick={() => handleClickDetailProductButton(record)} className={'bg-blue-500 text-white rounded-md hover:bg-blue:500/25 hover:text-blue-500 duration-300'} icon={<EyeOutlined />} size="large" />
                         </Tooltip>
-                        <Tooltip title={'Düzenle'}>
-                            <Button className={'bg-brand-green px-3 py-1 text-white rounded-md hover:bg-brand-green/20 hover:text-brand-green duration-300'} icon={<EditOutlined />} size="large" />
-                        </Tooltip>
-                        <Tooltip title={'Sil'}>
-                            <Button className={'bg-brand-green px-3 py-1 text-white rounded-md hover:bg-brand-green/20 hover:text-brand-green duration-300'} icon={<DeleteOutlined />} size="large" />
-                        </Tooltip>
+                        {
+                            activeUser?._id === productsOwner?._id && (
+                                <>
+                                    <Tooltip title={'Düzenle'}>
+                                        <Button onClick={() => handleClickEditProductButton(record)} className={'bg-brand-green px-3 py-1 text-white rounded-md hover:bg-brand-green/20 hover:text-brand-green duration-300'} icon={<EditOutlined />} size="large" />
+                                    </Tooltip>
+                                    <Tooltip title={'Sil'}>
+                                        <Popconfirm
+                                            title="İlanı Sil"
+                                            description={`"${record.name}" isimli ürünü silmek istediğinize emin misiniz? Bu işlem geri alınamaz.`}
+                                            onConfirm={() => handleClickDeleteProductButton(record)}
+                                            cancelText="İptal Et"
+                                            okText="Evet"
+                                            okButtonProps={{
+                                                className:
+                                                    "bg-brand-green text-white hover:bg-brand-green/20 hover:text-brand-green duration-300",
+                                            }}
+                                        >
+                                            <Button className={'bg-brand-green px-3 py-1 text-white rounded-md hover:bg-brand-green/20 hover:text-brand-green duration-300'} icon={<DeleteOutlined />} size="large" />
+                                        </Popconfirm>
+                                        </Tooltip>
+                                </>
+                            )
+                        }
+
                     </div>
                 )
             }
         }
     ]
 
-    const handleClickDetailButton = (record) => {
-        console.log(record)
+    const handleClickDetailProductButton = (record) => {
+        navigate(`/product/${record._id}`)
+    }
+    const handleClickEditProductButton = (record) => {
+        setSelectedProduct(record);
+        setIsShowEditProductModal(true);
     }
 
-    return (<Table className={'w-full'} columns={columns} dataSource={products} />)
+    const handleClickDeleteProductButton = (record) => {
+        dispatch(deleteProduct(record._id)).then(() => {
+            message.success('Ürün başarıyla silindi.')
+            navigate('/me')
+        }).catch((err) => {
+            message.error('Ürün silinirken bir hata oluştu.' + err.message);
+        });
+    }
+    return (
+        <>
+            <Table className={'w-full'} rowKey={'_id'} columns={columns} dataSource={products} />
+            {
+                isShowEditProductModal && (<EditProductModal isModalOpen={isShowEditProductModal} handleCancel={() => setIsShowEditProductModal(false)} categories={categoriesCtx} product={selectedProduct} />)
+            }
+        </>
+    )
 }
