@@ -2,6 +2,7 @@ import {Card, Image, Rate, Tag} from "antd";
 import {useState, useEffect} from "react";
 import {EnvironmentOutlined, FieldTimeOutlined, MailOutlined} from "@ant-design/icons";
 import {differenceInDays} from "date-fns";
+import {ProductOfferTable} from "./ProductOfferTable.jsx";
 export const ProductInfoCard = ({product}) => {
     const [productUsageLevel, setProductUsageLevel] = useState('');
 
@@ -18,7 +19,7 @@ export const ProductInfoCard = ({product}) => {
     }, [])
 
     return (
-            <div className={'w-full flex flex-row justify-center items-center'}>
+            <div className={'w-full flex flex-col justify-center items-center'}>
                 <Card title={product?.name} className={'w-2/3 mx-48'} extra={<span><Tag color="geekblue">ID: {product?._id}</Tag></span>}>
                     <Card
                         type="inner"
@@ -68,6 +69,11 @@ export const ProductInfoCard = ({product}) => {
                             </div>
                     </Card>
                 </Card>
+                <div className={'mb-20 bg-white w-2/3 mx-48'}>
+                    {
+                        product?.incomingOffers?.length > 0 ? <ProductOfferTable offers={product?.incomingOffers} /> : <h1>There is no offer for this product!</h1>
+                    }
+                </div>
             </div>
     )
 };
