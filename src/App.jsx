@@ -26,6 +26,11 @@ function App() {
               element={!activeUser ? <Navigate to="/feed" /> : <Profile />}
           />
           <Route
+              path="/profile/:id"
+              exact
+              element={!activeUser ? <Navigate to="/feed" /> : <Profile />}
+          />
+          <Route
                 path="/product/:id"
                 element={
                     !activeUser ? <Navigate to="/" /> : <ProductDetail />

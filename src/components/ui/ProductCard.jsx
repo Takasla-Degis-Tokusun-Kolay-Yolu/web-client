@@ -1,6 +1,12 @@
 import { BarChartOutlined } from "@ant-design/icons";
 import { Avatar, Image, Tag } from "antd";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserById } from "../../store/actions/auth.js";
+import { useNavigate } from "react-router-dom";
 export const ProductCard = ({ productData }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
     const CategoryView = () => {
         if (productData.categoryId.length > 4) {
             const firstThreeCategories = productData.categoryId.slice(0, 3);
@@ -29,13 +35,25 @@ export const ProductCard = ({ productData }) => {
             );
         }
     };
+    const {activeUser} = useSelector((state) => state.auth);
+    const handleClickProfile = (user) => {
+        dispatch(getUserById(user._id)).then(() => {
+          if(user._id === activeUser._id) {
+            navigate('/profile/me');
+          } else {
+            navigate(`/profile/${user._id}`);
+          }
+        })
+    }
 
   return (
     <div className="w-full mb-2 md:mb-3 sm:w-1/3 md:w-1/3 lg:w-1/5 container bg-white rounded-xl shadow-lg transform transition duration-500 hover:scale-105 hover:shadow-2xl">
       <div>
         {productData.categoryId.length > 0 && (<CategoryView />)}
-        <h1 className="text-md mt-1 ml-4 font-bold text-gray-800 cursor-pointer hover:text-gray-900 transition duration-100">
+        <h1  className="text-md mt-1 ml-4 font-bold text-gray-800 cursor-pointer hover:text-gray-900 hover:underline transition duration-100">
+          <Link to={`/product/${productData._id}`}>
           {productData.name}
+          </Link>
         </h1>
         <p className="ml-4 text-sm mb-2 text-gray-700 cursor-pointer">
           Az Kullanılmış
@@ -64,7 +82,7 @@ export const ProductCard = ({ productData }) => {
               {productData.userId.firstName[0].toUpperCase()}
             </Avatar>
           )}
-          <h2 className="text-gray-800 font-bold cursor-pointer hover:underline">
+          <h2 className="text-gray-800 font-bold cursor-pointer hover:underline" onClick={() => handleClickProfile(productData.userId)}>
             {productData.userId.firstName} {productData.userId.lastName}
           </h2>
         </div>

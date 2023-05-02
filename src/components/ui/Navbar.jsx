@@ -13,6 +13,7 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/images/logo-top.png";
 import { CreateProductModal } from "./CreateProductModal";
 import {getAllCategories} from "../../store/actions/categories.js";
+import { getUserById } from "../../store/actions/auth.js";
 export const NavBar = () => {
   useEffect(() => {
     if (initialRef.current === 0) {
@@ -72,29 +73,9 @@ export const NavBar = () => {
     },
   ];
 
-  const handleMenuClick = (e) => {
-    switch (e.key) {
-      case "1":
-        navigate("/me")
-        break;
-      case "2":
-        setIsShowDrawer(true);
-        break;
-      case "3":
-        logoutHandler();
-        break;
-    }
-  };
+  
 
-  const handleButtonClick = (e) => {
-    //message.info("Click on left button.");
-    console.log("click left button", e.key);
-  };
-
-  const menuProps = {
-    items,
-    onClick: handleMenuClick,
-  };
+  
 
   const [userInformation, setUserInformation] = useState({});
   const activeUser = useSelector((state) => state.auth.activeUser);
@@ -126,6 +107,31 @@ export const NavBar = () => {
     }
   }, [categoriesFromStore]);
 
+  const handleMenuClick = (e) => {
+    switch (e.key) {
+      case "1":
+        dispatch(getUserById(activeUser._id)).then(() => {
+          navigate('/me')
+        })
+        break;
+      case "2":
+        setIsShowDrawer(true);
+        break;
+      case "3":
+        logoutHandler();
+        break;
+    }
+  };
+
+  const handleButtonClick = (e) => {
+    //message.info("Click on left button.");
+    console.log("click left button", e.key);
+  };
+
+  const menuProps = {
+    items,
+    onClick: handleMenuClick,
+  };
 
   return (
     <Fragment>
@@ -140,7 +146,7 @@ export const NavBar = () => {
               />
             </Link>
             <div className="hidden md:block">
-              <div className="ml-10 flex items-baseline space-x-4">
+              <div className="ml-10 flex items-baseline space-x-4 text-gray-700">
                 {navigation.map((item) => (
                   <a
                     href={item.href}
@@ -174,7 +180,7 @@ export const NavBar = () => {
                       "flex flex-row items-center gap-x-2 bg-gray-100 py-2 px-4 rounded-md cursor-pointer"
                     }
                   >
-                    <p>
+                    <p className="text-gray-700">
                       {userInformation
                         ? userInformation?.firstName +
                           " " +

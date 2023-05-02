@@ -19,3 +19,5 @@ export const signUp = (formData) => API.post("/", formData);
 export const updateUser = (formData) => API.patch(`/`, formData);
 
 export const deleteUser = (userId) => API.delete(`/${userId}`);
+
+export const getUserById = (userId) => API.get(`/${userId}`);

@@ -5,6 +5,7 @@ import {
   START_LOADING,
   END_LOADING,
   DELETE_USER,
+  SET_SPECIFIC_USER
 } from "../../utils/constants/actionTypes.js";
 import { message } from "antd";
 // Action creators: functions that return actions
@@ -50,6 +51,17 @@ export const deleteUser = (userId, navigate) => async (dispatch) => {
     dispatch({ type: DELETE_USER, payload: data });
     navigate("/");
     message.success("Your profile has been deleted!");
+    dispatch({ type: END_LOADING });
+  } catch (e) {
+    message.error(e.response.data.message);
+  }
+};
+
+export const getUserById = (userId) => async (dispatch) => {
+  try {
+    dispatch({ type: START_LOADING });
+    const { data } = await api.getUserById(userId);
+    dispatch({ type: SET_SPECIFIC_USER, payload: data });
     dispatch({ type: END_LOADING });
   } catch (e) {
     message.error(e.response.data.message);
