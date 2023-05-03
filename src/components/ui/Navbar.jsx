@@ -14,6 +14,7 @@ import logo from "../../assets/images/logo-top.png";
 import { CreateProductModal } from "./CreateProductModal";
 import {getAllCategories} from "../../store/actions/categories.js";
 import { getUserById } from "../../store/actions/auth.js";
+import { userProducts } from "../../store/actions/products";
 export const NavBar = () => {
   useEffect(() => {
     if (initialRef.current === 0) {
@@ -111,7 +112,9 @@ export const NavBar = () => {
     switch (e.key) {
       case "1":
         dispatch(getUserById(activeUser._id)).then(() => {
-          navigate('/me')
+          dispatch(userProducts(activeUser._id)).then(() => {
+            navigate('/profile/me')
+          })
         })
         break;
       case "2":

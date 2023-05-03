@@ -3,6 +3,7 @@ import {useState, useEffect} from "react";
 import {EnvironmentOutlined, FieldTimeOutlined, MailOutlined} from "@ant-design/icons";
 import {differenceInDays} from "date-fns";
 import {ProductOfferTable} from "./ProductOfferTable.jsx";
+import { Link } from "react-router-dom";
 export const ProductInfoCard = ({product}) => {
     const [productUsageLevel, setProductUsageLevel] = useState('');
 
@@ -59,7 +60,7 @@ export const ProductInfoCard = ({product}) => {
                                     src={product?.userId?.profileImage}
                                     preview={{maskClassName: 'rounded-lg'}}
                                 />
-                                <Card size={'small'} className={'w-full'} type={'inner'} title={product?.userId?.firstName + ' ' + product?.userId?.lastName} extra={<Rate rootClassName={'flex justify-center mb-2'} disabled defaultValue={product?.userId?.rate} />} >
+                                <Card size={'small'} className={'w-full'} type={'inner'} title={<Link to={`/profile/${product.userId._id}`} >{product?.userId?.firstName + ' ' + product?.userId?.lastName}</Link>} extra={<Rate rootClassName={'flex justify-center mb-2'} disabled defaultValue={product?.userId?.rate} />} >
                                     <div className={'flex flex-row gap-x-4'}>
                                         <p><MailOutlined className={'me-2'} />{product?.userId?.email}</p>
                                         <p><EnvironmentOutlined className={'me-2'} /> {product?.userId?.location} </p>

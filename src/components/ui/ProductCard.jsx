@@ -3,6 +3,7 @@ import { Avatar, Image, Tag } from "antd";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserById } from "../../store/actions/auth.js";
+import {userProducts} from "../../store/actions/products.js";
 import { useNavigate } from "react-router-dom";
 export const ProductCard = ({ productData }) => {
   const dispatch = useDispatch();
@@ -38,6 +39,7 @@ export const ProductCard = ({ productData }) => {
     const {activeUser} = useSelector((state) => state.auth);
     const handleClickProfile = (user) => {
         dispatch(getUserById(user._id)).then(() => {
+        dispatch(userProducts(user._id));
           if(user._id === activeUser._id) {
             navigate('/profile/me');
           } else {

@@ -7,17 +7,19 @@ import {useDispatch} from "react-redux";
 import {deleteProduct} from "../../store/actions/products.js";
 import {useNavigate} from "react-router-dom";
 export const ProductListTable = ({ products }) => {
-    const [productsOwner, setProductsOwner] = useState({});
+    const [productsOwnerId, setProductsOwnerId] = useState("");
     const [isShowEditProductModal, setIsShowEditProductModal] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState({});
     const categoriesCtx = useSelector(state => state.categories.categories);
     const navigate = useNavigate();
+    // owner of the products
     useEffect(() => {
         if (products.length > 0) {
-            setProductsOwner(products[0].userId);
+            setProductsOwnerId(products[0].userId?._id);
         }
 
     }, [])
+    // fetch active user
     const activeUser = useSelector(state => state.auth.activeUser);
     const dispatch = useDispatch();
     const columns = [
@@ -107,7 +109,7 @@ export const ProductListTable = ({ products }) => {
                             <Button onClick={() => handleClickDetailProductButton(record)} className={'bg-blue-500 text-white rounded-md hover:bg-blue:500/25 hover:text-blue-500 duration-300'} icon={<EyeOutlined />} size="large" />
                         </Tooltip>
                         {
-                            activeUser?._id === productsOwner?._id && (
+                            activeUser._id.toString() === productsOwnerId && (
                                 <>
                                     <Tooltip title={'Düzenle'}>
                                         <Button onClick={() => handleClickEditProductButton(record)} className={'bg-brand-green px-3 py-1 text-white rounded-md hover:bg-brand-green/20 hover:text-brand-green duration-300'} icon={<EditOutlined />} size="large" />

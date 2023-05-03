@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import {ProductListCard} from "./ProductListCard.jsx";
 import {ProductListTable} from "./ProductListTable.jsx";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,11 +8,6 @@ import { message } from "antd";
 
 export const ProductListWrapper = ({ user }) => {
     const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(userProducts(user?._id)).then(()=> {
-        message.success('Ürünler başarıyla yüklendi.')
-        })
-    }, [user])
     const {isLoading, specUserProducts } = useSelector((state) => state.products);
 
     return (

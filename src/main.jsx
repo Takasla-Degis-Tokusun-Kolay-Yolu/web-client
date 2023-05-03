@@ -29,7 +29,7 @@ store.subscribe(() => {
   console.log(store.getState());
 });
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <ConfigProvider
@@ -43,5 +43,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         </ConfigProvider>
       </PersistGate>
     </Provider>
-  </React.StrictMode>
+  // </React.StrictMode>
 );
