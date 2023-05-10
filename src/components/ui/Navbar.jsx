@@ -14,16 +14,10 @@ import logo from "../../assets/images/logo-top.png";
 import { CreateProductModal } from "./CreateProductModal";
 import {getAllCategories} from "../../store/actions/categories.js";
 import { getUserById } from "../../store/actions/auth.js";
-import { userProducts } from "../../store/actions/products";
+import { getLoggedUserProducts, userProducts } from "../../store/actions/products";
 import {CATEGORIES, FEED} from "../../utils/constants/tabTypes.js";
 export const NavBar = ({ activeTab }) => {
-  useEffect(() => {
-    if (initialRef.current === 0) {
-      dispatch(getAllCategories());
-      initialRef.current = 1;
-      return;
-    }
-  }, []);
+  
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [userToken, setUserToken] = useState(
@@ -85,6 +79,7 @@ export const NavBar = ({ activeTab }) => {
   useEffect(() => {
     if (initialRef.current === 0) {
       dispatch(getAllCategories());
+      dispatch(getLoggedUserProducts(activeUser?._id));
       initialRef.current = 1;
       return;
     }

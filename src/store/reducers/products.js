@@ -6,13 +6,15 @@ import {
   FETCH_USER_PRODUCTS,
   FETCH_ONE_PRODUCT,
   UPDATE_PRODUCT,
-  DELETE_PRODUCT
+  DELETE_PRODUCT,
+  FETCH_LOGGED_USER_PRODUCTS
 } from "../../utils/constants/actionTypes.js";
 
 const initialState = {
   products: [],
   specProduct: {},
   specUserProducts: [],
+  loggedUserProducts: [],
   isLoading: true,
 };
 
@@ -40,6 +42,8 @@ const productsReducer = (state = initialState, action) => {
       return { ...state,
         specUserProducts: state.specUserProducts.map((product) => product._id === action.payload.data._id ? action.payload.data : product)
       };
+    case FETCH_LOGGED_USER_PRODUCTS:
+      return { ...state, loggedUserProducts: action.payload.data };
     case FETCH_ONE_PRODUCT:
         return { ...state, specProduct: action.payload.data };
     case FETCH_USER_PRODUCTS:
