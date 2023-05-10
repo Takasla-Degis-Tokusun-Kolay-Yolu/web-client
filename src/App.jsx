@@ -5,6 +5,7 @@ import Feed from "./pages/Feed/Feed.jsx";
 import { useSelector } from "react-redux";
 import {Profile} from "./pages/Profile/Profile.jsx";
 import {ProductDetail} from "./pages/ProductDetail/ProductDetail.jsx";
+import {Categories} from "./pages/Categories/Categories.jsx";
 
 function App() {
   const activeUser = useSelector((state) => state.auth.activeUser);
@@ -24,6 +25,11 @@ function App() {
               path="/me"
               exact
               element={!activeUser ? <Navigate to="/feed" /> : <Profile />}
+          />
+          <Route
+            path="/categories"
+            exact
+            element={!activeUser ? <Navigate to="/feed" /> : <Categories />}
           />
           <Route
               path="/profile/:id"

@@ -6,6 +6,7 @@ import { ProductWrapper } from "../../components/ui/ProductWrapper";
 import { Loader } from "../../components/global/Loader";
 import { useDispatch } from "react-redux";
 import { getAllProducts } from "../../store/actions/products.js";
+import {FEED} from "../../utils/constants/tabTypes.js";
 const Feed = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -32,7 +33,7 @@ const Feed = () => {
 
   return (
     <>
-      <NavBar />
+      <NavBar activeTab={FEED} />
       {isLoading || products.length === 0 ? (
         <Loader />
       ) : (

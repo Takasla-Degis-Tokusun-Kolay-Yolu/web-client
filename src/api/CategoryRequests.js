@@ -11,3 +11,4 @@ API.interceptors.request.use((req) => {
   return req;
 });
 export const getAllCategories = () => API.get("/");
+export const getCategoryById = (categoryId) => API.get(`/${categoryId}`);

@@ -6,6 +6,7 @@ import {NavBar} from "../../components/ui/Navbar.jsx";
 import {Loader} from "../../components/global/Loader";
 import {Hero} from "./Hero.jsx";
 import {ProductInfoCard} from "./ProductInfoCard.jsx";
+import {PRODUCT_DETAILS} from "../../utils/constants/tabTypes.js";
 export const ProductDetail = () => {
     const dispatch = useDispatch();
     const {id} = useParams();
@@ -16,7 +17,7 @@ export const ProductDetail = () => {
 
     return (
         <div>
-            <NavBar/>
+            <NavBar activeTab={PRODUCT_DETAILS}/>
             {
                 isLoading ? <Loader/> :
                     (

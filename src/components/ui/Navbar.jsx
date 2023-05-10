@@ -15,7 +15,8 @@ import { CreateProductModal } from "./CreateProductModal";
 import {getAllCategories} from "../../store/actions/categories.js";
 import { getUserById } from "../../store/actions/auth.js";
 import { userProducts } from "../../store/actions/products";
-export const NavBar = () => {
+import {CATEGORIES, FEED} from "../../utils/constants/tabTypes.js";
+export const NavBar = ({ activeTab }) => {
   useEffect(() => {
     if (initialRef.current === 0) {
       dispatch(getAllCategories());
@@ -51,8 +52,8 @@ export const NavBar = () => {
   };
 
   const navigation = [
-    { id: 1, name: "Akış", href: "/feed", current: true },
-    { id: 2, name: "Kategoriler", href: "/profile", current: false },
+    { id: 1, name: "Akış", href: "/feed", current: activeTab === FEED },
+    { id: 2, name: "Kategoriler", href: "/categories", current: activeTab === CATEGORIES },
   ];
 
   const items = [
@@ -154,7 +155,7 @@ export const NavBar = () => {
                   <a
                     href={item.href}
                     key={item.id}
-                    className={"text-xl font-medium"}
+                    className={`text-xl font-medium ${item.current ? "text-brand-green" : "text-gray-700"} hover:text-brand-green/50 hover:bg-brand-green/20 hover:rounded-md px-3 py-2 rounded-md text-sm font-medium`}
                   >
                     {item.name}
                   </a>
