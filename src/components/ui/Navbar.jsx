@@ -16,6 +16,7 @@ import {getAllCategories} from "../../store/actions/categories.js";
 import { getUserById } from "../../store/actions/auth.js";
 import { getLoggedUserProducts, userProducts } from "../../store/actions/products";
 import {CATEGORIES, FEED} from "../../utils/constants/tabTypes.js";
+import {getLoggedUserOffers} from "../../store/actions/offers.js";
 export const NavBar = ({ activeTab }) => {
   
   const dispatch = useDispatch();
@@ -80,6 +81,7 @@ export const NavBar = ({ activeTab }) => {
     if (initialRef.current === 0) {
       dispatch(getAllCategories());
       dispatch(getLoggedUserProducts(activeUser?._id));
+      dispatch(getLoggedUserOffers(activeUser?._id));
       initialRef.current = 1;
       return;
     }

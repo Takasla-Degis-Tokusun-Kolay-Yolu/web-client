@@ -1,8 +1,18 @@
-import { Col, Row, Modal, Space, Button, Form, Image, Select } from "antd";
-
+import {Col, Row, Modal, Space, Button, Form, Image, Select, message} from "antd";
+import {useDispatch} from "react-redux";
+import { createOffer } from "../../store/actions/offers.js";
 export const GiveOfferModal = ({ isModalOpen, handleCancel, userProducts, selectedProduct }) => {
+    const dispatch = useDispatch();
     const handleSaveForm = (values) => {
-        console.log(values)
+        const requestBody = {
+            advertiserProducts: selectedProduct?._id,
+            advertiserUser: selectedProduct?.userId?._id,
+            applicantProducts: values.applicantProducts,
+        }
+        dispatch(createOffer(requestBody)).then(() => {
+            message.success('Teklif başarıyla gönderildi.');
+            handleCancel();
+        });
     };
 
     return (
@@ -56,20 +66,23 @@ export const GiveOfferModal = ({ isModalOpen, handleCancel, userProducts, select
                         >
                             <Select
                                 size={"large"}
-                                mode={"multiple"}
+                                mode={"single"}
                                 showSearch={false}
                                 maxTagCount={"responsive"}
                                 placeholder={"Ürün Seçiniz"}
                             >
                                 {
                                     userProducts?.map((product) => (
-                                        <Select.Option key={product._id} value={product._id} className='flex flex-row justify-center items-center'>
-                                            <div>
-                                                <Image src={product.image} className={'rounded-md border-2 border-brand-green mx-auto object-cover !w-8 !h-8'} />
+                                        <Select.Option key={product._id} value={product._id} >
+                                            <div className='flex flex-row items-center gap-x-2'>
+                                                <div>
+                                                    <Image src={product.image} className={'rounded-md border-2 border-brand-green mx-auto object-cover !w-8 !h-8'} />
+                                                </div>
+                                                <div>
+                                                    <p>{product.name}</p>
+                                                </div>
                                             </div>
-                                            <div>
-                                                <p>{product.name}</p>
-                                            </div>
+
                                         </Select.Option>
                                     ))
                                 }
