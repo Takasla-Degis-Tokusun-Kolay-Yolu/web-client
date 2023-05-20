@@ -14,8 +14,8 @@ export const TabView = ({user}) => {
                     defaultActiveKey="products"
                     items={[
                         {key: 'products', label: 'Ürünler', children: <Products user={user}/>},
-                        {key: 'request', label: 'Başvurular', children: <Requests user={user}/>},
-                        {key: 'offer', label: 'Teklifler', children: <Offers user={user}/>},
+                        {key: 'request', label: 'Gelen Başvurular', children: <Requests user={user}/>},
+                        {key: 'offer', label: 'Giden Teklifler', children: <Offers user={user}/>},
                     ]}
                 />
         </div>

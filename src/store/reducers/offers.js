@@ -1,10 +1,10 @@
-import {CREATE_OFFER, START_OFFER_LOADING, END_OFFER_LOADING, FETCH_LOGGED_USER_INCOMING_OFFERS} from "../../utils/constants/actionTypes.js";
+import {CREATE_OFFER, START_OFFER_LOADING, END_OFFER_LOADING, FETCH_LOGGED_USER_INCOMING_OFFERS, FETCH_SPECIFIC_USER_INCOMING_OFFERS} from "../../utils/constants/actionTypes.js";
 
 const initialState = {
     isLoading: false,
     activeUserOutgoingOffers: [],
     activeUserIncomingOffers: [],
-    specProductOffers: [],
+    specificUserIncomingOffers: [],
 };
 
 const offersReducer = (state = initialState, action) => {
@@ -19,6 +19,8 @@ const offersReducer = (state = initialState, action) => {
                 ...state,
                 isLoading: true,
             };
+        case FETCH_SPECIFIC_USER_INCOMING_OFFERS:
+            return {...state, specificUserIncomingOffers: action.payload.data}
         case END_OFFER_LOADING:
             return {
                 ...state,

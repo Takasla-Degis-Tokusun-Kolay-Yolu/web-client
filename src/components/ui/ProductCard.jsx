@@ -41,7 +41,7 @@ export const ProductCard = ({ productData }) => {
         dispatch(getUserById(user._id)).then(() => {
         dispatch(userProducts(user._id));
           if(user._id === activeUser._id) {
-            navigate('/profile/me');
+            navigate(`/profile/${activeUser._id}`);
           } else {
             navigate(`/profile/${user._id}`);
           }

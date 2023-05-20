@@ -111,7 +111,8 @@ export const NavBar = ({ activeTab }) => {
       case "1":
         dispatch(getUserById(activeUser._id)).then(() => {
           dispatch(userProducts(activeUser._id)).then(() => {
-            navigate('/profile/me')
+            //navigate('/profile/me')
+            navigate(`/profile/${activeUser._id}`)
           })
         })
         break;

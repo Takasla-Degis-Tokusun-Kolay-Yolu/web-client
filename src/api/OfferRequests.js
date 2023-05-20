@@ -15,3 +15,5 @@ API.interceptors.request.use((req) => {
 export const createOffer = (formData) => API.post("/", formData);
 
 export const fetchActiveUserIncomingOffers = (userId) => API.get(`/active-user-incoming-offers/${userId}`);
+
+export const fetchSpecificUserIncomingOffers = (userId) => API.get(`/specific-user-incoming-offers/${userId}`);

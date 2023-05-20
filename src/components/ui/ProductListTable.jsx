@@ -150,7 +150,8 @@ export const ProductListTable = ({ products }) => {
     const handleClickDeleteProductButton = (record) => {
         dispatch(deleteProduct(record._id)).then(() => {
             message.success('Ürün başarıyla silindi.')
-            navigate('/me')
+            //navigate('/me')
+            navigate(`/profile/${activeUser._id}`)
         }).catch((err) => {
             message.error('Ürün silinirken bir hata oluştu.' + err.message);
         });

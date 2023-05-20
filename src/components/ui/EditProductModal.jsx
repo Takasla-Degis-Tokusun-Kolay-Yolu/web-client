@@ -44,7 +44,7 @@ export const EditProductModal = ({
         dispatch(updateProduct(product._id, values)).then(() => {
             handleCancel();
             message.success('Ürün başarıyla güncellendi.');
-            navigate('/me');
+            //navigate('/me');
         })
     };
 
