@@ -15,8 +15,11 @@ export const getCategoryById = (categoryId) => async (dispatch) => {
     try {
       dispatch({ type: START_CATEGORY_LOADING });
       const { data } = await api.getCategoryById(categoryId);
+      console.log(data);
       dispatch({ type: GET_CATEGORY_W_PRODUCTS, payload: data });
-      dispatch({ type: END_CATEGORY_LOADING });
+      setTimeout(() => {
+          dispatch({ type: END_CATEGORY_LOADING });
+      }, 1000);
     } catch (error) {
         message.error(error.response.data.message);
     }

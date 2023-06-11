@@ -8,7 +8,7 @@ export const OfferListWrapper = ({ user, isActiveUserSpecUser }) => {
     return (
         <div
             className={
-                "flex flex-col justify-center  items-start mx-auto w-full"
+                "flex flex-col justify-center mx-auto w-full"
             }
         >
             {

@@ -32,18 +32,20 @@ export const Banner = () => {
             <div>
                 {isLoading ?
                     <Loader /> :
-                    specCategory.products.length === 0 ?
-                        <Result
-                            className={'pt-20 bg-gray-100 h-screen'}
-                            status="warning"
-                            title="Bu kategoride henüz ürün bulunmamaktadır. Lütfen daha sonra tekrar deneyiniz."
-                            extra={
-                                <Button  key="console">
-                                    <Link to={"/feed"}>Anasayfaya Dön</Link>
-                                </Button>
-                            }
-                        /> :
-                    <ProductWrapper products={specCategory.products} />}
+                    specCategory.products && specCategory.products.length === 0 ?
+                        (
+                            <Result
+                                className={'pt-20 bg-gray-100 h-screen'}
+                                status="warning"
+                                title="Bu kategoride henüz ürün bulunmamaktadır. Lütfen daha sonra tekrar deneyiniz."
+                                extra={
+                                    <Button  key="console">
+                                        <Link to={"/feed"}>Anasayfaya Dön</Link>
+                                    </Button>
+                                }
+                            />
+                        ) :
+                        (<ProductWrapper products={specCategory.products} />)}
             </div>
         </>
     )

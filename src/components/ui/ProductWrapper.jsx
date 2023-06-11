@@ -7,7 +7,7 @@ export const ProductWrapper = ({ products }) => {
         "min-h-screen bg-gray-100 flex flex-wrap justify-center gap-x-4 items-start pt-10 mx-auto px-10"
       }
     >
-        {products.map((item) => (
+        {products && products.map((item) => (
             <ProductCard key={item._id} productData={item} />
         ))}
     </div>

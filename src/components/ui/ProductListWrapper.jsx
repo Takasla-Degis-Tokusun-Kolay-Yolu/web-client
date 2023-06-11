@@ -11,14 +11,20 @@ export const ProductListWrapper = ({ user }) => {
     const {isLoading, specUserProducts } = useSelector((state) => state.products);
 
     return (
-        <div
-            className={
-                "flex flex-col justify-center  items-start mx-auto w-full"
-            }
-        >
+        <>
+            <div
+                className={
+                    "flex flex-col justify-center  items-start mx-auto w-full"
+                }
+            >
+                {
+                    !isLoading &&  (<ProductListTable products={specUserProducts} />)
+                }
+            </div>
             {
-                isLoading ? (<Loader />) : (<ProductListTable products={specUserProducts} />)
+                isLoading && <Loader />
             }
-        </div>
+        </>
+
     );
 };

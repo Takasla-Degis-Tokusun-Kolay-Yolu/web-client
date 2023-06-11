@@ -58,7 +58,15 @@ export const ProductCard = ({ productData }) => {
           </Link>
         </h1>
         <p className="ml-4 text-sm mb-2 text-gray-700 cursor-pointer">
-          Az Kullanılmış
+            {
+                productData.usageLevel === 0 && ('Yeni/Etiketli')
+            }
+            {
+                productData.usageLevel === 1 && ('Az Kullanılmış')
+            }
+            {
+                productData.usageLevel === 2 && ('Kullanılmış')
+            }
         </p>
       </div>
       <Image
